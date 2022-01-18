@@ -23,32 +23,21 @@ const wallet = Keypair.fromSecretKey(
 );
 
 /** There are better way to generate an array of dates but be careful as it's irreversible */
+const now = new Date();
+const date1 = new Date(now.getTime() + 5*60000);
+const date2 = new Date(now.getTime() + 10*60000);
 const DATES = [
-  new Date(2022, 12),
-  new Date(2023, 1),
-  new Date(2023, 2),
-  new Date(2023, 3),
-  new Date(2023, 4),
-  new Date(2023, 5),
-  new Date(2023, 6),
-  new Date(2023, 7),
-  new Date(2023, 8),
-  new Date(2023, 9),
-  new Date(2023, 10),
-  new Date(2023, 11),
-  new Date(2024, 12),
-  new Date(2024, 2),
-  new Date(2024, 3),
-  new Date(2024, 4),
-  new Date(2024, 5),
-  new Date(2024, 6),
-  new Date(2024, 7),
-  new Date(2024, 8),
-  new Date(2024, 9),
-  new Date(2024, 10),
-  new Date(2024, 11),
-  new Date(2024, 12),
+  // new Date(),
+  // new Date('-12-17T03:24:00.146Z')),
+  // new Date(2022, 2),
+  // new Date(2022, 3),
+  // new Date(2022, 4),
+  now,
+  date1,
+  date2
 ];
+// console.log(DATES);
+// throw new Error('console date');
 
 /** Info about the desintation */
 const DESTINATION_OWNER = new PublicKey('');
@@ -56,13 +45,13 @@ const DESTINATION_TOKEN_ACCOUNT = new PublicKey('');
 
 /** Token info */
 const MINT = new PublicKey('');
-const DECIMALS = 0;
+const DECIMALS = 9;
 
 /** Info about the source */
 const SOURCE_TOKEN_ACCOUNT = new PublicKey('');
 
 /** Amount to give per schedule */
-const AMOUNT_PER_SCHEDULE = 0;
+const AMOUNT_PER_SCHEDULE = 30;
 
 /** Your RPC connection */
 const connection = new Connection('');

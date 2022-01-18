@@ -4,8 +4,8 @@ anchor_version = "0.13.2"
 members = ["program"]
 
 [provider]
-cluster = "mainnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [programs.mainnet]
-token_vesting = "CChTq6PthWU82YZkbveA3WDf7s97BWhBK4Vx9bmsT743"
+token_vesting = "C4twuLidmxnWNX7NfUMECE8exXoC3ZNiUxokLG5vWEiM"

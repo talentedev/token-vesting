@@ -57,7 +57,7 @@ fn main() {
         sysvarclock_program_id: sysvar::clock::id(),
         rent_program_id: sysvar::rent::id(),
         token_program_id: spl_token::id(),
-        vesting_program_id: Pubkey::from_str("VestingbGKPFXCWuBvfkegQfZyiNwAJb9Ss623VQ5DA").unwrap(),
+        vesting_program_id: Pubkey::from_str("C4twuLidmxnWNX7NfUMECE8exXoC3ZNiUxokLG5vWEiM").unwrap(),
         mint_authority: Keypair::new()
     };
 
