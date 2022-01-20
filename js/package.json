@@ -13,9 +13,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
-    "dev": "tsc && node dist/dev.js",
+    "lock": "tsc && node dist/lock.js",
     "unlock": "tsc && node dist/unlock.js",
-    "getATAddress": "tsc && node dist/getATAddress.js",
+    "get-token-address": "tsc && node dist/token_address.js",
     "build": "tsc",
     "lint": "npm run pretty && eslint .",
     "lint:fix": "npm run pretty:fix && eslint . --fix",
