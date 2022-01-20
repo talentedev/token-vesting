@@ -15,7 +15,7 @@
     "prepublish": "tsc",
     "lock": "tsc && node dist/lock.js",
     "unlock": "tsc && node dist/unlock.js",
-    "get-token-address": "tsc && node dist/token_address.js",
+    "get-ataddress": "tsc && node dist/token_address.js",
     "build": "tsc",
     "lint": "npm run pretty && eslint .",
     "lint:fix": "npm run pretty:fix && eslint . --fix",

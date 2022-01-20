@@ -20,9 +20,12 @@ import {
 import { ContractInfo, Schedule } from './state';
 import { assert } from 'console';
 import bs58 from 'bs58';
+import {
+  token_vesting_program_id,
+} from './variables';
 
 export const TOKEN_VESTING_PROGRAM_ID = new PublicKey(
-  'C4twuLidmxnWNX7NfUMECE8exXoC3ZNiUxokLG5vWEiM',
+  token_vesting_program_id,
 );
 
 export async function create(

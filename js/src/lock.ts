@@ -7,6 +7,15 @@ import {
 } from './utils';
 import { Schedule } from './state';
 import { create, TOKEN_VESTING_PROGRAM_ID } from './main';
+import {
+  RPC,
+  WALLET_PATH,
+  token_address,
+  token_account,
+  DECIMALS,
+  distination_owner,
+  distination_token_account
+} from './variables';
 
 /**
  *
@@ -16,8 +25,6 @@ import { create, TOKEN_VESTING_PROGRAM_ID } from './main';
  *
  */
 
-/** Path to your wallet */
-const WALLET_PATH = '';
 const wallet = Keypair.fromSecretKey(
   new Uint8Array(JSON.parse(fs.readFileSync(WALLET_PATH).toString())),
 );
@@ -32,29 +39,25 @@ const DATES = [
   // new Date(2022, 2),
   // new Date(2022, 3),
   // new Date(2022, 4),
-  now,
   date1,
   date2
 ];
-// console.log(DATES);
-// throw new Error('console date');
-
-/** Info about the desintation */
-const DESTINATION_OWNER = new PublicKey('');
-const DESTINATION_TOKEN_ACCOUNT = new PublicKey('');
-
-/** Token info */
-const MINT = new PublicKey('');
-const DECIMALS = 9;
-
-/** Info about the source */
-const SOURCE_TOKEN_ACCOUNT = new PublicKey('');
 
 /** Amount to give per schedule */
-const AMOUNT_PER_SCHEDULE = 30;
+const AMOUNT_PER_SCHEDULE = [50, 100];
+
+/** Info about the desintation */
+const DESTINATION_OWNER = new PublicKey(distination_owner);
+const DESTINATION_TOKEN_ACCOUNT = new PublicKey(distination_token_account);
+
+/** Token info */
+const MINT = new PublicKey(token_address);
+
+/** Info about the source */
+const SOURCE_TOKEN_ACCOUNT = new PublicKey(token_account);
 
 /** Your RPC connection */
-const connection = new Connection('');
+const connection = new Connection(RPC);
 
 /** Do some checks before sending the tokens */
 const checks = async () => {
@@ -79,15 +82,17 @@ const checks = async () => {
 const lock = async () => {
   await checks();
   const schedules: Schedule[] = [];
+  let index = 0;
   for (let date of DATES) {
     schedules.push(
       new Schedule(
         /** Has to be in seconds */
         new Numberu64(date.getTime() / 1_000),
         /** Don't forget to add decimals */
-        new Numberu64(AMOUNT_PER_SCHEDULE * Math.pow(10, DECIMALS)),
+        new Numberu64(AMOUNT_PER_SCHEDULE[index] * Math.pow(10, DECIMALS)),
       ),
     );
+    index++;
   }
   const seed = generateRandomSeed();
 

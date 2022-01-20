@@ -1,0 +1,13 @@
+{
+	"rpc": "https://api.devnet.solana.com",
+	"wallet_path": "../keypair.json",
+	"wallet_address": "",
+	"token_address": "",
+	"token_account": "",
+	"decimals": 9,
+	"token_vesting_program_id": "",
+	"distination_owner": "",
+	"distination_token_account": "",
+	"associated_wallet_address": "",
+	"locked_seed": ""
+}

@@ -5,6 +5,12 @@ import {
   createAssociatedTokenAccount,
   signTransactionInstructions
 } from './utils';
+import {
+  RPC,
+  WALLET_PATH,
+  token_address,
+  associated_wallet_address
+} from './variables';
 
 /**
  *
@@ -12,45 +18,25 @@ import {
  *
  */
 
- /** Path to your wallet */
-const WALLET_PATH = '/home/dev/.config/solana/id.json';
 const wallet = Keypair.fromSecretKey(
   new Uint8Array(JSON.parse(fs.readFileSync(WALLET_PATH).toString())),
 );
 
 /** Your RPC connection */
-const connection = new Connection('https://api.devnet.solana.com');
+const connection = new Connection(RPC);
 
 const ASSOCIATED_TOKEN_PROGRAM_ID: PublicKey = new PublicKey(
   'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL',
 );
 
 /** Token info */
-const MINT = new PublicKey('CdjhPzEihiFH1xhjuH7nY66kcUrkuh14L2iMmxDX1UYU');
+const MINT = new PublicKey(token_address);
 
 const walletAdress: PublicKey = new PublicKey(
-  '5s6FoT7fn9wrYh8j8bYzkPfuczteUU74fjNnpMcL3ez1',
+  associated_wallet_address
 );
 
-// const createAssociatedTokenAccount = async (
-//   walletAddress: PublicKey,
-// ): Promise<TransactionInstruction> => {
-//   const keys = [
-//     {
-//       pubkey: walletAddress,
-//       isSigner: false,
-//       isWritable: true,
-//     }
-//   ];
-
-//   return new TransactionInstruction({
-//     keys,
-//     programId: ASSOCIATED_TOKEN_PROGRAM_ID,
-//     data: Buffer.from([]),
-//   });
-// }
-
- /** Function that get an associated token account */
+/** Function that get an associated token account */
 const getATAccount = async () => {
   let instruction = [
     await createAssociatedTokenAccount(

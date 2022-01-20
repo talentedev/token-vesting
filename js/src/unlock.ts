@@ -6,6 +6,12 @@ import {
   signTransactionInstructions,
 } from './utils';
 import { unlock, TOKEN_VESTING_PROGRAM_ID } from './main';
+import {
+  RPC,
+  WALLET_PATH,
+  token_address,
+  locked_seed
+} from './variables';
 
 /**
  *
@@ -13,36 +19,38 @@ import { unlock, TOKEN_VESTING_PROGRAM_ID } from './main';
  *
  */
 
-/** Path to your wallet */
-const WALLET_PATH = '';
 const wallet = Keypair.fromSecretKey(
   new Uint8Array(JSON.parse(fs.readFileSync(WALLET_PATH).toString())),
 );
 
 /** Token info */
-const MINT = new PublicKey('');
+const MINT = new PublicKey(token_address);
 
 /** Your RPC connection */
-const connection = new Connection('');
-const seed = '';
+const connection = new Connection(RPC);
 
 /** Function that unlocks the tokens */
 const unlockToken = async () => {
   const instruction = await unlock(
     connection,
     TOKEN_VESTING_PROGRAM_ID,
-    Buffer.from(seed),
+    Buffer.from(locked_seed),
     MINT
   );
 
-  const tx = await signTransactionInstructions(
-    connection,
-    [wallet],
-    wallet.publicKey,
-    instruction,
-  );
+  try {
+    const tx = await signTransactionInstructions(
+      connection,
+      [wallet],
+      wallet.publicKey,
+      instruction,
+    );
+  
+    console.log(`Transaction: ${tx}`);
+  } catch(err) {
+    console.log(err);
+  }
 
-  console.log(`Transaction: ${tx}`);
 }
 
 unlockToken();
